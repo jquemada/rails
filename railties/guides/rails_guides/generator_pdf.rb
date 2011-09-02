@@ -147,22 +147,22 @@ module RailsGuides
 
       File.open(File.join(output_dir, output_file), 'w') do |f|
 
-		
+
  		body = File.read(File.join(source_dir, guide))
-		
+
 		index =  %x{grep "^h[3-4].*$" #{File.join(source_dir, guide)}}
-		
+
 
 #		index = body.gsub(/([^h][^3-4][^.].*$)/, '')
 
 #		index = index.gsub(/^(h3\.[ ]*)(.*)$/, "<span class='h3'>\\2</span>")
 #		index = index.gsub(/^(h4\.[ ]*)(.*)$/, "<span class='h4'>\\2</span>")
-		
+
 #		index = index.gsub(/^(h3\.[ ]*)(.*)$/, "\# *\"\\2\":(\#" + (("\\2").gsub(/a/, '-')) + ")*")
 
 		index = index.gsub(/^(h3\.[ ]*)(.*)$/, "\# *\\2*")
 		index = index.gsub(/^(h4\.[ ]*)(.*)$/, " ** \\2")
-		
+
 
 		body = body.gsub(/h2\.(.*)$/, "<div class='guide'>\n\nh2. \\1 \n\n<div class='prologue'>")
 		body = body.gsub(/endprologue./, '</div>' + "\n\nh3. INDEX\n\n" + index)
@@ -171,48 +171,53 @@ module RailsGuides
 
 
 #        body = body.gsub(%r{([a-zA-Z0-9.,:;!?<>'"'_*+\^\~%-\(\)])(\n\r|\r\n|\r|\n)([a-zA-Z0-9.,:;!?<>'"'_*+\^\~%-\(\)])}, '\1 \3')
-		
+
 		body = body.gsub(%r{<pre>}, "<pre class='pre'>")
-		
+
 #	    puts "step 2"
 
 
-		body = body.gsub(%r{<ruby>}, "<pre class='ruby'>")
-		body = body.gsub(%r{</ruby>}, "</pre>")
+		body = body.gsub(%r{<ruby>}, "```ruby")
+		body = body.gsub(%r{</ruby>}, "```")
 
-		body = body.gsub(%r{<shell>}, "<pre class='shell'>")
-		body = body.gsub(%r{</shell>}, "</pre>")
+		body = body.gsub(%r{<shell>}, "```sh")
+		body = body.gsub(%r{</shell>}, "```")
 
-		body = body.gsub(%r{<yaml>}, "<pre class='yaml'>")
-		body = body.gsub(%r{</yaml>}, "</pre>")
+		body = body.gsub(%r{<yaml>}, "```yaml")
+		body = body.gsub(%r{</yaml>}, "```")
 
-		body = body.gsub(%r{<html>}, "<pre class='html'>")
-		body = body.gsub(%r{</html>}, "</pre>")
+		body = body.gsub(%r{<html>}, "```html")
+		body = body.gsub(%r{</html>}, "```")
 
-		body = body.gsub(%r{<erb>}, "<pre class='erb'>")
-		body = body.gsub(%r{</erb>}, "</pre>")
-		
-		body = body.gsub(%r{<plain>}, "<pre class='plain'>")
-		body = body.gsub(%r{</plain>}, "</pre>")
-		
+		body = body.gsub(%r{<erb>}, "```erb")
+		body = body.gsub(%r{</erb>}, "```")
+
+		body = body.gsub(%r{<plain>}, "```text")
+		body = body.gsub(%r{</plain>}, "```")
+
 		body = body.gsub(%r{<tt>}, "<tt class='tt'>")
 
 #        puts "step 3"
 
-		body = body.gsub(%r{TIP:|TIP.}, 'p(tip). *TIP:*')
-		body = body.gsub(%r{NOTE:|NOTE.}, 'p(note). *NOTE:*')
-		body = body.gsub(%r{INFO:|INFO.}, 'p(info). *INFO:*')
-		body = body.gsub(%r{WARNING.|WARNING.}, 'p(warning). *WARNING:*')
+		body = body.gsub(%r{TIP:|TIP.}, 'div(tip). ')
+		body = body.gsub(%r{NOTE:|NOTE.}, 'div(note). ')
+		body = body.gsub(%r{INFO:|INFO.}, 'div(info). ')
+		body = body.gsub(%r{WARNING.|WARNING.}, 'div(warning). ')
 		body = body + '</div>'
 
 #        puts "step 4"
+
+    # Rewrite headers to include id for internal linking in pdf
+    body = body.gsub /(h\d)\. (.+)/ do
+      "#{$1}(##{$2.parameterize}). #{$2}"
+    end
 
         f.write body
       end
 
       puts "Generating #{output_file}"
-	  
-      #PDF: generate PDF using gimli      
+
+      #PDF: generate PDF using gimli
 	  %x{gimli -f #{File.join(output_dir, output_file)} -s 'guides/assets/stylesheets/pdf.css' -o #{output_dir}}
 
     end

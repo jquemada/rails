@@ -7,60 +7,161 @@
 	font-size: 11pt;
 }
 
-p {
-	text-align: justify;
-	padding: 0pt;
-	margin: 0pt;
-	margin-bottom: 3pt;
-	padding-bottom: 0pt;
+body {
+  background: white;
+  width: auto;
+	margin: 0 5%;
+	padding: 0;
+	border: 0;
+	float: none !important;
+	color: black;
+  font-size: 12pt;
+  font-family: Helvetica, Arial, sans-serif;
+  line-height: 1.5em;
+}
+
+a, a:link, a:visited {
+	color: #ee3f3f;
+	text-decoration: underline;
+}
+
+a:link:after, a:visited:after {
+  content: " (" attr(href) ") ";
+  font-size: 90%;
+}
+
+a[href^="/"]:after {
+  content: " (http://guides.rubyonrails.org" attr(href) ") ";
+}
+
+a[href^="#"]:after, a[href^="#"]:link:after, a[href^="#"]:visited:after {
+  content: none !important;
+}
+
+li ul, li ol { margin:0 1.5em; }
+ul, ol { margin: 0 1.5em 1.5em 1.5em; }
+
+ul { list-style-type: disc; }
+ol { list-style-type: decimal; }
+
+dl { margin: 0 0 1.5em 0; }
+dl dt { font-weight: bold; }
+dd { margin-left: 1.5em;}
+
+pre,code { margin: 1.5em 0; overflow: auto; color: #222;}
+pre,code,tt {
+  font-size: 1em;
+  font-family: "Anonymous Pro", "Inconsolata", "Menlo", "Consolas", "Bitstream Vera Sans Mono", "Courier New", monospace;
+  line-height: 1.5;
+}
+
+abbr, acronym { border-bottom: 1px dotted #666; }
+address { margin: 0 0 1.5em; font-style: italic; }
+del { color:#666; }
+
+blockquote { margin: 1.5em; color: #666; font-style: italic; }
+strong { font-weight: bold; }
+em, dfn { font-style: italic; }
+dfn { font-weight: bold; }
+sup, sub { line-height: 0; }
+p {margin: 0 0 1.5em;}
+
+label { font-weight: bold; }
+fieldset { padding:1.4em; margin: 0 0 1.5em 0; border: 1px solid #ccc; }
+legend { font-weight: bold; font-size:1.2em; }
+
+input.text, input.title,
+textarea, select {
+  margin:0.5em 0;
+  border:1px solid #bbb;
+}
+
+table {
+	margin: 0 0 1.5em;
+	border: 2px solid #CCC;
+	background: #FFF;
+	border-collapse: collapse;
+}
+
+table th, table td {
+	padding: 0.25em 1em;
+	border: 1px solid #CCC;
+	border-collapse: collapse;
+}
+
+table th {
+	border-bottom: 2px solid #CCC;
+	background: #EEE;
+	font-weight: bold;
+	padding: 0.5em 1em;
 }
 
 .prologue {
-	background-color: #FBB;
-   	padding: 10pt;
-   	margin: 0pt;
+	background-color: #d5e9f6;
+  padding: 10pt;
+  margin: 0pt;
 }
 
+.work-in-progress, .work-in-progress {
+	background: #fff9d8 url(/images/tab_yellow.gif) no-repeat left top;
+	border: none;
+	padding: 1.25em 1em 1.25em 48px;
+	margin-left: 0;
+	margin-top: 0.25em;
+}
 
+.warning, .warning {
+	background: #f9d9d8 url(images/tab_red.gif) no-repeat left top;
+	border: none;
+	padding: 1.25em 1.25em 1.25em 48px;
+	margin-left: 0;
+	margin-top: 0.25em;
+}
+
+/* Headings
+--------------------------------------- */
+
+h1 {
+	font-size: 2.5em;
+	line-height: 1em;
+	margin: 0.6em 0 .2em;
+	font-weight: bold;
+	}
 
 h2 {
-	font-size: 30pt;
-}
-
+	font-size: 2.1428em;
+	line-height: 1em;
+	margin: 0.7em 0 .2333em;
+	font-weight: bold;
+	}
 
 h3 {
-	font-size: 19pt;
-   	padding: 0pt;
-	margin: 0pt;
-	padding-top: 13pt;
-   	padding-bottom: 3pt;
-}
-
+	font-size: 1.7142em;
+	line-height: 1.286em;
+	margin: 0.875em 0 0.2916em;
+	font-weight: bold;
+	}
 
 h4 {
-	font-size: 17pt;
-   	padding: 0pt;
-	margin: 0pt;
-	padding-top: 6pt;
-	padding-bottom: 3pt;
-}
-
+	font-size: 1.2857em;
+	line-height: 1.2em;
+	margin: 1.6667em 0 .3887em;
+	font-weight: bold;
+	}
 
 h5 {
-	font-size: 15pt;
-   	padding: 0pt;
-	margin: 0pt;
-	padding-top: 6pt;
-	padding-bottom: 3pt;
+	font-size: 1em;
+	line-height: 1.5em;
+	margin: 1em 0 .5em;
+	font-weight: bold;
 }
 
 h6 {
-	font-size: 13pt;
-   	padding: 0pt;
-	margin: 0pt;
-	padding-top: 6pt;
-	padding-bottom: 3pt;
-}
+	font-size: 1em;
+	line-height: 1.5em;
+	margin: 1em 0 .5em;
+	font-weight: normal;
+	}
 
 
 table {
@@ -70,50 +171,62 @@ table {
 
 td {
 	border: 1px solid black;
-    padding: 2px;
+  padding: 2px;
 }
 
-
-.ruby, .shell, .html, .yaml, .erb, .plain, .pre {
-	background-color: #EFEFEF;    
-	font-size: 9pt;
-   	padding: 2pt;
-   	padding-left: 4pt;
-	margin: 2pt;
-    line-height: 10pt;
-    border: none;
+.highlight {
+  background: #EEE url(images/tab_grey.gif) no-repeat left top;
+	padding: 1em 1em 0.25em 48px;
+	margin: 0.25em 0 1.5em 0;
 }
 
-
-.tt {
-    background-color: transparent;    
-    border: none;
-    font-size: 11pt;
-}
-
-
-.tip {
-	background-color: #DEF;
-   	padding: 2pt;
-   	margin: 10pt;
+.highlight pre, pre
+{
+  word-wrap: break-word;
+  margin: 0;
+  padding: 0;
+  border: none !important;
+  -moz-border-radius: 0 !important;
+  -webkit-border-radius: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
 }
 
 .note {
-	background-color: #FFA;
-   	padding: 2pt;
-   	margin: 10pt;
+	background: #fff9d8 url(/images/tab_note.gif) no-repeat left top;
+	border: none;
+	padding: 1em 1em 0.25em 48px;
+	margin: 0.25em 0 1.5em 0;
 }
 
 .info {
-	background-color: #DFD;
-   	padding: 2pt;
-   	margin: 10pt;
+	background: #d5e9f6 url(images/tab_info.gif) no-repeat left top;
+	border: none;
+	padding: 1em 1em 0.25em 48px;
+	margin: 0.25em 0 1.5em 0;
 }
 
-.warning {
-	background-color: #FEE;
-   	padding: 2pt;
-   	margin: 10pt;
+.note tt, .info tt {border:none; background: none; padding: 0;}
+
+/* Same bottom margin for special boxes than for regular paragraphs, this way
+intermediate whitespace looks uniform. */
+.code_container, .important, .caution, .warning, .note, .info {
+    margin-bottom: 1.5em;
 }
 
+/* Remove bottom margin of paragraphs in special boxes, otherwise they get a
+spurious blank area below with the box background. */
+.important p, .caution p, .warning p, .note p, .info p {
+    margin-bottom: 1em;
+}
 
+/* Edge Badge
+--------------------------------------- */
+
+#edge-badge {
+  position: fixed;
+  right: 0px;
+  top: 0px;
+  z-index: 100;
+  border: none;
+}
